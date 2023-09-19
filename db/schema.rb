@@ -10,93 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_19_061340) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_19_102452) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "action_text_rich_texts", force: :cascade do |t|
+  create_table "items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "type", null: false
     t.string "name", null: false
-    t.text "body"
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
+    t.boolean "banned_on_flea", null: false
+    t.boolean "have_market_data", null: false
+    t.string "short_name", null: false
+    t.integer "price", null: false
+    t.integer "base_price", null: false
+    t.integer "avg24h_price", null: false
+    t.integer "avg7days_price", null: false
+    t.integer "trader", null: false
+    t.integer "trader_price", null: false
+    t.integer "trader_price_cur", null: false
+    t.integer "trader_price_rub", null: false
+    t.datetime "updated", null: false
+    t.integer "slots", null: false
+    t.decimal "diff24h", null: false
+    t.decimal "diff7days", null: false
+    t.string "icon"
+    t.string "link"
+    t.string "wiki_link"
+    t.string "img"
+    t.string "img_big"
+    t.string "bsg_id"
+    t.boolean "is_functional", null: false
+    t.integer "sub_category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+    t.decimal "recoil_percent"
+    t.decimal "ergonomics"
   end
 
-  create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
-  end
-
-  create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.string "service_name", null: false
-    t.bigint "byte_size", null: false
-    t.string "checksum"
-    t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
-    t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
-
-  create_table "articles", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.bigint "article_id", null: false
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["article_id"], name: "index_comments_on_article_id"
-  end
-
-  create_table "items", force: :cascade do |t|
-    t.string "type"
-    t.string "name"
-    t.boolean "bannedOnFlea"
-    t.boolean "haveMarketData"
-    t.string "shortName"
-    t.integer "price"
-    t.integer "basePrice"
-    t.integer "avg24hPrice"
-    t.integer "avg7daysPrice"
-    t.integer "traderName"
-    t.integer "traderPrice"
-    t.integer "traderPriceCur"
-    t.integer "traderPriceRub"
-    t.datetime "updated"
-    t.integer "slots"
-    t.string "diff24h"
-    t.string "diff7days"
-    t.boolean "icon"
-    t.boolean "link"
-    t.boolean "wikiLink"
-    t.boolean "img"
-    t.boolean "imgBig"
-    t.string "bsgId"
-    t.boolean "isFunctional"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "comments", "articles"
 end

@@ -1,0 +1,2 @@
+class Barter < Item
+end

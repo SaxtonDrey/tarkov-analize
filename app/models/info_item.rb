@@ -1,0 +1,2 @@
+class InfoItem < Item
+end

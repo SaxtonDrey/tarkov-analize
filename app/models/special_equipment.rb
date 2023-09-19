@@ -1,0 +1,2 @@
+class SpecialEquipment < Item
+end

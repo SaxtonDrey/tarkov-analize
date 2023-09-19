@@ -53,6 +53,7 @@ gem 'image_processing', '~> 1.12'
 
 gem 'brakeman'
 gem 'bundler-audit'
+gem 'mechanize'
 gem 'rubocop-rails'
 
 group :development, :test do
