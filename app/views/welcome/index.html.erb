@@ -1,12 +1,9 @@
 <h1>Welcome</h1>
 
-<%= link_to "Articles", articles_path %>
-
-
 <h2>Stimulus Check</h2>
 
 <div data-controller="hello">
-  <input data-hello-target="name" type="text">
+  <input data-hello-target="name" type="text" autocomplete="off">
 
   <button data-action="click->hello#greet">
     Greet
